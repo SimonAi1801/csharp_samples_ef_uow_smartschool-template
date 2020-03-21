@@ -20,10 +20,6 @@ namespace SmartSchool.Persistence
             _dbContext.Measurements.AddRange(measurements);
         }
 
-        public Measurement[] GetAllMeasurements() => _dbContext
-                                                     .Measurements
-                                                     .ToArray();
-
         public Measurement[] GetMeasurementByLocationAndName(string location, string name)
         {
             return _dbContext

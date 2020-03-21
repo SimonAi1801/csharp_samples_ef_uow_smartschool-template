@@ -19,6 +19,7 @@ namespace SmartSchool.Persistence
         {
             return _dbContext
                     .Sensors
+                    .Include(s => s.Measurements)
                     .Select( s => new {
                         Name = s.Name,
                         Location = s.Location,
@@ -31,7 +32,5 @@ namespace SmartSchool.Persistence
                     .ToArray();
 
         }
-
-        public Sensor[] GetAllSensors() => _dbContext.Sensors.ToArray();
     }
 }
