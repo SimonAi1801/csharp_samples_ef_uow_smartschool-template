@@ -30,7 +30,6 @@ namespace SmartSchool.Persistence
                     .AsEnumerable()
                     .Select(s => (s.Name, s.Location, s.Avg))
                     .ToArray();
-
         }
     }
 }

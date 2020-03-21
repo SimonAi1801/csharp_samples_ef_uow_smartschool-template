@@ -56,6 +56,11 @@ namespace SmartSchool.TestConsole
 				Console.WriteLine();
 				Console.WriteLine("Alle Sensoren mit dem Durchschnitt der Messwerte");
 				var avgAllSensors = unitOfWork.SensorRepository.GetAllAvgSensors();
+				Console.WriteLine($"{"Location",-20}{"Name",-20}{"Value",-20}");
+				foreach (var item in avgAllSensors)
+				{
+					Console.WriteLine($"{item.Location, -20} {item.Name, -20} {item.Avg, -20 :f2}");
+				}
 			}
 
 			Console.Write("Beenden mit Eingabetaste ...");

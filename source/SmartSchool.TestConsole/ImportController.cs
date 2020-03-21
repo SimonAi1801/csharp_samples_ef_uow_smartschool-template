@@ -27,8 +27,8 @@ namespace SmartSchool.TestConsole
                 if (!isFirstRow)
                 {
                     string[] parts = item.Split(";");
-                    string location = parts[2].Split("_")[1];
-                    string name = parts[2].Split("_")[0];
+                    string location = parts[2].Split("_")[0];
+                    string name = parts[2].Split("_")[1];
                     DateTime dateTime = DateTime.Parse($"{parts[0]} {parts[1]}");
                     Measurement measurement = new Measurement() { Time = dateTime, Value = Convert.ToDouble(parts[3]) };
                     Sensor tmp;
