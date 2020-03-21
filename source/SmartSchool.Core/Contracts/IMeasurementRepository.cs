@@ -9,6 +9,7 @@ namespace SmartSchool.Core.Contracts
 
         Measurement[] GetAllMeasurements();
 
-        IEnumerable<Measurement> GetMeasurementBySensorLocationAndName(string location, string name);
+        IEnumerable<Measurement> GetMeasurementByLocationAndName(string location, string name);
+        IEnumerable<Measurement> GetCo2MeasurementsByLocationAndRange(string location, int min, int max);
     }
 }

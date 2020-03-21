@@ -24,11 +24,19 @@ namespace SmartSchool.Persistence
                                                      .Measurements
                                                      .ToArray();
 
-        public IEnumerable<Measurement> GetMeasurementBySensorLocationAndName(string location, string name) => _dbContext
-                                                                                                               .Measurements
-                                                                                                               .Include(s => s.Sensor)
-                                                                                                               .Where(m => m.Sensor.Location == location)
-                                                                                                               .Where(m => m.Sensor.Name == name);
+        public IEnumerable<Measurement> GetMeasurementByLocationAndName(string location, string name) => _dbContext
+                                                                                                        .Measurements
+                                                                                                        .Include(s => s.Sensor)
+                                                                                                        .Where(s => s.Sensor.Location == location)
+                                                                                                        .Where(s => s.Sensor.Name == name);
+
+        public IEnumerable<Measurement> GetCo2MeasurementsByLocationAndRange(string location, int min, int max) => _dbContext
+                                                                                        .Measurements
+                                                                                        .Include(s => s.Sensor)
+                                                                                        .Where(s => s.Sensor.Location == location)
+                                                                                        .Where(s => s.Sensor.Name == "co2")
+                                                                                        .Where(s => s.Value > min)
+                                                                                        .Where(s => s.Value < max);
 
     }
 }
