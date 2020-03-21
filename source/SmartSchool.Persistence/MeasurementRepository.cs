@@ -31,6 +31,7 @@ namespace SmartSchool.Persistence
                     .Take(3)
                     .ToArray();
         }
+
         public int GetMeasurementCountByLocationAndName(string location, string name)
         {
             return _dbContext

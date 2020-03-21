@@ -17,11 +17,12 @@ namespace SmartSchool.TestConsole
         /// </summary>
         public static IEnumerable<Measurement> ReadFromCsv()
         {
+            bool isFirstRow = true;
             string filePath = MyFile.GetFullNameInApplicationTree(Filename);
             string[] lines = File.ReadAllLines(filePath, Encoding.UTF8);
             IList<Measurement> measurements = new List<Measurement>();
             IDictionary<string, Sensor> sensors = new Dictionary<string, Sensor>();
-            bool isFirstRow = true;
+
             foreach (var item in lines)
             {
                 if (!isFirstRow)
