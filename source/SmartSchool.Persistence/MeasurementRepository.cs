@@ -15,7 +15,7 @@ namespace SmartSchool.Persistence
             _dbContext = dbContext;
         }
 
-        public  void AddRange(Measurement[] measurements)
+        public void AddRange(Measurement[] measurements)
         {
             _dbContext.Measurements.AddRange(measurements);
         }
@@ -24,19 +24,35 @@ namespace SmartSchool.Persistence
                                                      .Measurements
                                                      .ToArray();
 
-        public IEnumerable<Measurement> GetMeasurementByLocationAndName(string location, string name) => _dbContext
-                                                                                                        .Measurements
-                                                                                                        .Include(s => s.Sensor)
-                                                                                                        .Where(s => s.Sensor.Location == location)
-                                                                                                        .Where(s => s.Sensor.Name == name);
+        public Measurement[] GetMeasurementByLocationAndName(string location, string name)
+        {
+            return _dbContext
+                    .Measurements
+                    .Include(s => s.Sensor)
+                    .Where(s => s.Sensor.Location.Equals(location) && s.Sensor.Name.Equals(name))
+                    .OrderByDescending(m => m.Value)
+                    .ThenByDescending(m => m.Time)
+                    .Take(3)
+                    .ToArray();
+        }
+        public int GetMeasurementCountByLocationAndName(string location, string name)
+        {
+            return _dbContext
+                   .Measurements
+                   .Include(m => m.Sensor)
+                   .Where(m => m.Sensor.Location.Equals(location) && m.Sensor.Name.Equals(name))
+                   .Count();
+                   
+        }
 
-        public IEnumerable<Measurement> GetCo2MeasurementsByLocationAndRange(string location, int min, int max) => _dbContext
-                                                                                        .Measurements
-                                                                                        .Include(s => s.Sensor)
-                                                                                        .Where(s => s.Sensor.Location == location)
-                                                                                        .Where(s => s.Sensor.Name == "co2")
-                                                                                        .Where(s => s.Value > min)
-                                                                                        .Where(s => s.Value < max);
-
+        public double GetCo2MeasurementsByLocationAndRange(string location, int min, int max)
+        {
+            return _dbContext
+                    .Measurements
+                    .Include(s => s.Sensor)
+                    .Where(s => s.Sensor.Location.Equals(location) && s.Sensor.Name.Equals("co2"))
+                    .Where(s => s.Value > min && s.Value < max)
+                    .Average(s => s.Value);
+        }
     }
 }
