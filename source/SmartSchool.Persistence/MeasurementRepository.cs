@@ -18,5 +18,9 @@ namespace SmartSchool.Persistence
             _dbContext.Measurements.AddRange(measurements);
         }
 
-   }
+        public Measurement[] GetMeasurements()
+        {
+            throw new System.NotImplementedException();
+        }
+    }
 }
