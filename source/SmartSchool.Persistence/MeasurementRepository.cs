@@ -1,6 +1,8 @@
 ﻿using SmartSchool.Core.Contracts;
 using SmartSchool.Core.Entities;
+using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace SmartSchool.Persistence
 {
@@ -18,9 +20,15 @@ namespace SmartSchool.Persistence
             _dbContext.Measurements.AddRange(measurements);
         }
 
-        public Measurement[] GetMeasurements()
-        {
-            throw new System.NotImplementedException();
-        }
+        public Measurement[] GetAllMeasurements() => _dbContext
+                                                     .Measurements
+                                                     .ToArray();
+
+        public IEnumerable<Measurement> GetMeasurementBySensorLocationAndName(string location, string name) => _dbContext
+                                                                                                               .Measurements
+                                                                                                               .Include(s => s.Sensor)
+                                                                                                               .Where(m => m.Sensor.Location == location)
+                                                                                                               .Where(m => m.Sensor.Name == name);
+
     }
 }

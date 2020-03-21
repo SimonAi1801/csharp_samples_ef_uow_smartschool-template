@@ -40,11 +40,13 @@ namespace SmartSchool.TestConsole
 				Console.WriteLine("--------------------------------------------");
 				Console.WriteLine();
 
-				var count = 0;   // TODO
+				var count = unitOfWork.MeasurementRepository.GetMeasurementBySensorLocationAndName("livingroom", "temperature").Count();
 				Console.WriteLine($"Anzahl Messwerte für Sensor temperature in location livingroom: {count}");
 				Console.WriteLine();
 
-				var greatestmeasurements = new Measurement[0];  // TODO
+				var greatestmeasurements = unitOfWork.MeasurementRepository.GetMeasurementBySensorLocationAndName("livingroom", "temperature")
+																		   .Take(3)
+																		   .ToArray();
 				Console.WriteLine("Letzte 3 höchste Temperaturmesswerte im Wohnzimmer");
 				WriteMeasurements(greatestmeasurements);
 				Console.WriteLine();

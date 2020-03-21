@@ -1,4 +1,5 @@
 ﻿using SmartSchool.Core.Entities;
+using System.Collections.Generic;
 
 namespace SmartSchool.Core.Contracts
 {
@@ -6,6 +7,8 @@ namespace SmartSchool.Core.Contracts
     {
         void AddRange(Measurement[] measurements);
 
-        Measurement[] GetMeasurements();
+        Measurement[] GetAllMeasurements();
+
+        IEnumerable<Measurement> GetMeasurementBySensorLocationAndName(string location, string name);
     }
 }

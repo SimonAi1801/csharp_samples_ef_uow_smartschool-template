@@ -14,19 +14,9 @@ namespace SmartSchool.Persistence
             _dbContext = dbContext;
         }
 
-        public void Add(Sensor sensor)
-        {
-            throw new System.NotImplementedException();
-        }
+        public Sensor[] GetAllSensors() => _dbContext.Sensors.ToArray();
 
-        public Sensor[] GetAllSensors()
-        {
-            throw new System.NotImplementedException();
-        }
 
-        public void Update(Sensor sensor)
-        {
-            throw new System.NotImplementedException();
-        }
+
     }
 }
