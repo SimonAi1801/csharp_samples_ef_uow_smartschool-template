@@ -51,7 +51,7 @@ namespace SmartSchool.TestConsole
 				WriteMeasurements(greatestmeasurements);
 				Console.WriteLine();
 
-				var average = unitOfWork.MeasurementRepository.GetCo2MeasurementsByLocationAndRange("office", 300, 5000);
+				var average = unitOfWork.MeasurementRepository.GetCo2MeasurementsAvgByLocationAndRange("office", 300, 5000);
 				Console.WriteLine($"Durchschnitt der gültigen Co2-Werte (>300, <5000) im office: {average}");
 				Console.WriteLine();
 				Console.WriteLine("Alle Sensoren mit dem Durchschnitt der Messwerte");

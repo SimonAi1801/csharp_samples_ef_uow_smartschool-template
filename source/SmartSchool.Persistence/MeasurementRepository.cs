@@ -41,7 +41,7 @@ namespace SmartSchool.Persistence
                    
         }
 
-        public double GetCo2MeasurementsByLocationAndRange(string location, int min, int max)
+        public double GetCo2MeasurementsAvgByLocationAndRange(string location, int min, int max)
         {
             return _dbContext
                     .Measurements
